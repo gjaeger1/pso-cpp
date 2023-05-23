@@ -23,17 +23,6 @@ endif(OPENMP_FOUND)
 
 add_subdirectory(dep)
 
-include_directories(
-    include
-    ${EIGEN3_INCLUDE_DIR}
-)
-
-install(FILES include/psocpp.h DESTINATION include)
-
-if(${BUILD_TESTS})
-    add_subdirectory(test)
-endif(${BUILD_TESTS})
-
-if(${BUILD_EXAMPLES})
-    add_subdirectory(examples)
-endif(${BUILD_EXAMPLES})
+add_library(psocpp INTERFACE)
+target_sources(psocpp INTERFACE)
+target_include_directories(psocpp INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include ${EIGEN3_INCLUDE_DIR})
